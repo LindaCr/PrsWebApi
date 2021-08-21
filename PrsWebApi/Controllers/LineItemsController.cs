@@ -10,7 +10,7 @@ using PrsWebApi.Models;
 
 namespace PrsWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/line-items")]
     [ApiController]
     public class LineItemsController : ControllerBase
     {
