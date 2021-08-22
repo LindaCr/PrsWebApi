@@ -119,9 +119,17 @@ namespace PrsWebApi.Controllers
             return login;
         }
 
+        //Put: update user without passing Id
+        [HttpPut]
+        public async Task<IActionResult> PutUser(User user)
+        {
 
+            _context.Entry(user).State = EntityState.Modified;
 
+            await _context.SaveChangesAsync();
 
+            return NoContent();
+        }
 
     }
 }

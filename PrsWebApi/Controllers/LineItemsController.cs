@@ -25,14 +25,14 @@ namespace PrsWebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<LineItem>>> GetLineItems()
         {
-            return await _context.LineItems.ToListAsync();
+            return await _context.LineItems.Include(li => li.Product).ToListAsync();
         }
 
         // GET: api/LineItems/5
         [HttpGet("{id}")]
         public async Task<ActionResult<LineItem>> GetLineItem(int id)
         {
-            var lineItem = await _context.LineItems.FindAsync(id);
+            var lineItem = await _context.LineItems.Include(li => li.Product).ThenInclude(p => p.Vendor).SingleOrDefaultAsync(r => r.Id==id);
 
             if (lineItem == null)
             {
